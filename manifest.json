@@ -1,0 +1,19 @@
+{
+  "manifest_version": 2,
+
+  "name": "Old bookmark",
+  "description": "Go to oldest bookmark",
+  "version": "0.1",
+
+  "permissions": [
+    "bookmarks", "history"
+  ],
+
+  "background": {
+    "scripts": ["background.js"]
+  },
+
+  "browser_action": {
+    "default_icon": "icon.png"
+  }
+}
