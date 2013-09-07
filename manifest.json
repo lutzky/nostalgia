@@ -1,8 +1,8 @@
 {
   "manifest_version": 2,
 
-  "name": "Old bookmark",
-  "description": "Go to oldest bookmark",
+  "name": "Nostalgia",
+  "description": "Open least-recently-accessed bookmark in a tab",
   "version": "0.1",
 
   "permissions": [
@@ -12,6 +12,8 @@
   "background": {
     "scripts": ["background.js"]
   },
+
+  "icons": { "128": "icon128.png" },
 
   "browser_action": {
     "default_icon": "icon.png"
