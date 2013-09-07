@@ -7,6 +7,8 @@ function maybeLaunch() {
   if (numBookmarks == 0) {
     console.debug("Launching " + minimalURL);
     chrome.tabs.create({url: minimalURL});
+    minimalURL = null;
+    minimalVisitTime = null;
   }
 }
 function latestVisitChecker(url) {
