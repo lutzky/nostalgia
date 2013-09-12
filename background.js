@@ -7,7 +7,16 @@ tab_id = null;
 function maybeLaunch() {
   if (numBookmarks == 0) {
     console.debug("Launching " + minimalURL);
-    chrome.tabs.update(tab_id, {url: minimalURL});
+    console.debug("setting for tabTarget: " + localStorage["tabTarget"]);
+    switch(localStorage["tabTarget"]) {
+      case "current":
+        chrome.tabs.update(tab_id, {url: minimalURL});
+        break;
+      case "newtab":
+      default:
+        chrome.tabs.create({url: minimalURL});
+        break;
+    }
     minimalURL = null;
     minimalVisitTime = null;
   }
