@@ -2,15 +2,17 @@ minimalURL = null;
 minimalVisitTime = null;
 
 numBookmarks = -1;
+tab_id = null;
 
 function maybeLaunch() {
   if (numBookmarks == 0) {
     console.debug("Launching " + minimalURL);
-    chrome.tabs.create({url: minimalURL});
+    chrome.tabs.update(tab_id, {url: minimalURL});
     minimalURL = null;
     minimalVisitTime = null;
   }
 }
+
 function latestVisitChecker(url) {
   return function(visits) {
     numBookmarks--;
@@ -31,7 +33,7 @@ function latestVisitChecker(url) {
     }
 
     if ((minimalVisitTime == null) || (latestVisit.visitTime < minimalVisitTime)) {
-      console.log("New leader with time " + minimalVisitTime);
+      console.debug("New leader with time " + minimalVisitTime);
       minimalVisitTime = latestVisit.visitTime;
       minimalURL = url;
     }
@@ -41,6 +43,7 @@ function latestVisitChecker(url) {
 }
 
 chrome.browserAction.onClicked.addListener(function(tab) {
+  tab_id = tab.id;
   chrome.bookmarks.search("http", function(bookmarks) {
     numBookmarks = bookmarks.length;
     for (var i = 0; i < bookmarks.length; ++i) {
