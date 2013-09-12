@@ -3,7 +3,7 @@
 
   "name": "Nostalgia",
   "description": "Open least-recently-accessed bookmark in a tab",
-  "version": "0.1",
+  "version": "0.2",
 
   "permissions": [
     "bookmarks", "history"
