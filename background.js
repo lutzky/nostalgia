@@ -6,7 +6,7 @@ tab_id = null;
 
 function maybeLaunch() {
   if (numBookmarks == 0) {
-    console.debug("Launching " + minimalURL);
+    console.info("Launching " + minimalURL);
     console.debug("setting for tabTarget: " + localStorage["tabTarget"]);
     switch(localStorage["tabTarget"]) {
       case "current":
@@ -28,7 +28,16 @@ function latestVisitChecker(url) {
     console.debug("Checking url " + url);
 
     if (visits.length == 0) {
-      console.debug("URL " + url + " seems to never have been visited.");
+      console.info("URL " + url + " seems to never have been visited.");
+
+      if (localStorage["ignoreNeverVisited"] != "true") {
+        minimalVisitTime = -Infinity;
+        minimalURL = url;
+      }
+      else {
+        console.info("Ignoring it because ignoreNeverVisited is set.");
+      }
+
       maybeLaunch();
       return;
     }
@@ -42,7 +51,7 @@ function latestVisitChecker(url) {
     }
 
     if ((minimalVisitTime == null) || (latestVisit.visitTime < minimalVisitTime)) {
-      console.debug("New leader with time " + minimalVisitTime);
+      console.info("New leader with time " + minimalVisitTime);
       minimalVisitTime = latestVisit.visitTime;
       minimalURL = url;
     }

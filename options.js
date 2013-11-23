@@ -12,12 +12,18 @@ function restore_options() {
       break;
     }
   }
+
+  var ignoreNeverVisited = localStorage["ignoreNeverVisited"];
+  document.getElementById("ignoreNeverVisited").checked = (ignoreNeverVisited == "true");
 }
 
 function save_options() {
   var select = document.getElementById("tabTarget");
   var tabTarget = select.children[select.selectedIndex].value;
   localStorage["tabTarget"] = tabTarget;
+
+  var checkbox = document.getElementById("ignoreNeverVisited");
+  localStorage["ignoreNeverVisited"] = checkbox.checked;
 
   var status_div = document.getElementById("status");
   status_div.innerHTML = "Saved.";
@@ -28,3 +34,4 @@ function save_options() {
 
 document.addEventListener('DOMContentLoaded', restore_options);
 document.querySelector('#tabTarget').addEventListener('change', save_options);
+document.querySelector('#ignoreNeverVisited').addEventListener('change', save_options);
